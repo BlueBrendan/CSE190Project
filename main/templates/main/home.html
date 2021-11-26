@@ -8,25 +8,22 @@
 {% block content %}
 <div class="pusher" style="padding-top: 8.5rem;">
 <div class="center-div">
-    <h1>Welcome to the UCSD Course Recommender!</h1>
+    <h1><b>Welcome to the UCSD Course Recommender!</b></h1>
     <br><br>
-    <h4>Step 1. Add classes you've already taken</h4>
-    <br>
-    <h5><input id="classes_dropdown_input" list="classes_dropdown" placeholder="example: CSE 190"/>
-    <datalist id="classes_dropdown">
-        <option value="CSE 190"/>
-        <option value="CSE 124"/>
-        <option value="CSE 101"/>
-    </datalist>
-
-    {% comment %} <select id="classes_dropdown">
-        <option hidden selected>Select</option>
-        <option>CSE 190</option>
-        <option>CSE 124</option>
-        <option>CSE 101</option>
-    </select> {% endcomment %}
-    <br><br>
-    <ul id="selected_classes"></ul>
+    <div class="center-div" style="display: flex; width: 50%;">
+    <div style="flex: 1;">
+        <h4 style="margin-bottom: 0.75rem;">Step 1. Add classes you've already taken</h4>
+        <h5><input id="classes_dropdown_input" list="classes_dropdown" placeholder="example: CSE 190"/>
+        <datalist id="classes_dropdown">
+            <option value="CSE 190"/>
+            <option value="CSE 124"/>
+            <option value="CSE 101"/>
+        </datalist>
+    </div>
+    <div style="flex: 1;">
+        <h4 style="margin-bottom: 0.75rem;">Selected Classes:</h4>
+        <ul id="selected_classes"></ul>
+    </div>    
 </div>
 </div>
 {% endblock %}
@@ -47,7 +44,6 @@
                         total_classes.push(selected_class);
                         let button = "<li class='course-item' id=" + selected_class.replace(/ /g,"_") + "><span class='course-name'>" + selected_class + "</span><i class='invisible-link red times icon'></i><br></li>"
                         $("#selected_classes").append(button);
-                        console.log(total_classes);
                     }
                     // Clear input
                     $("#classes_dropdown_input").removeAttr('placeholder');
