@@ -1,0 +1,37 @@
+body {
+    background: #f1f1f1 !important;
+    overflow-y: scroll;
+    font-family: helvetica;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: helvetica;
+}
+
+.center-div {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center;
+}
+
+.invisible-link {
+    text-decoration: none;
+    color: black;
+}
+
+.invisible-link:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.course-item {
+    padding-bottom: 1rem;
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    padding-left: 0rem;
+}

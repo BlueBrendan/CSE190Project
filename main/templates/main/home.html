@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+<div class="pusher" style="padding-top: 8.5rem;">
+<div class="center-div">
+    <h1>Welcome to the UCSD Course Recommender!</h1>
+    <br><br>
+    <h4>Step 1. Add classes you've already taken</h4>
+    <br>
+    <h5><input id="classes_dropdown_input" list="classes_dropdown" placeholder="example: CSE 190"/>
+    <datalist id="classes_dropdown">
+        <option value="CSE 190"/>
+        <option value="CSE 124"/>
+        <option value="CSE 101"/>
+    </datalist>
+
+    {% comment %} <select id="classes_dropdown">
+        <option hidden selected>Select</option>
+        <option>CSE 190</option>
+        <option>CSE 124</option>
+        <option>CSE 101</option>
+    </select> {% endcomment %}
+    <br><br>
+    <ul id="selected_classes"></ul>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function(){
+            var total_classes = [];
+
+            $("#classes_dropdown_input").on("input", function(event){
+                let val = this.value;
+                if($('#classes_dropdown option').filter(function(){
+                    return this.value.toUpperCase() === val.toUpperCase();
+                }).length) {
+                    
+                    let selected_class = this.value;
+                    if (!total_classes.includes(selected_class)){
+                        total_classes.push(selected_class);
+                        let button = "<li class='course-item' id=" + selected_class.replace(/ /g,"_") + "><span class='course-name'>" + selected_class + "</span><i class='invisible-link red times icon'></i><br></li>"
+                        $("#selected_classes").append(button);
+                        console.log(total_classes);
+                    }
+                    // Clear input
+                    $("#classes_dropdown_input").removeAttr('placeholder');
+                    $("#classes_dropdown_input").val("");
+                }
+                
+            });
+
+            /*$("#classes_dropdown_input").on("input", function(event){
+                console.log($(this).val());
+                let selected_class = $(this).val();
+                if (!total_classes.includes(selected_class)){
+                    total_classes.push(selected_class);
+                    let button = "<li class='course-item' id=" + selected_class.replace(/ /g,"_") + "><span class='course-name'>" + selected_class + "</span><i class='invisible-link red times icon'></i><br></li>"
+                    $("#selected_classes").append(button);
+                    console.log(total_classes);
+                }
+            });*/
+            $("#selected_classes").on("click", ".invisible-link", function(){
+                let course = $(this).closest(".course-item").find(".course-name").text();
+                $("#selected_classes #" + course.replace(/ /g,"_")).remove();
+
+                const index = total_classes.indexOf(course);
+                if (index > -1) {
+                total_classes.splice(index, 1);
+                }
+                console.log(total_classes);
+            })
+        });
+        
+    </script>
+{% endblock %}
