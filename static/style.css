@@ -33,6 +33,12 @@ li {
     font-size: 1.25rem;
 }
 
+/*Line break in flex containers*/
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
 ul {
     padding-left: 0rem;
 }

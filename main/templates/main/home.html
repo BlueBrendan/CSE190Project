@@ -10,19 +10,23 @@
 <div class="center-div">
     <h1><b>Welcome to the UCSD Course Recommender!</b></h1>
     <br><br>
-    <div class="center-div" style="display: flex; width: 50%;">
+    <div class="center-div" style="display: flex; width: 30%;">
     <div style="flex: 1;">
-        <h4 style="margin-bottom: 0.75rem;">Step 1. Add classes you've already taken</h4>
-        <h5><input id="classes_dropdown_input" list="classes_dropdown" placeholder="example: CSE 190"/>
+        <h4 style="margin-bottom: 0.75rem; float: left; text-align: left;">Step 1. Add classes you've already taken</h4>
+        <br><br>
+        <h5><input id="classes_dropdown_input" list="classes_dropdown" style="float: left;" placeholder="example: CSE 190"></input></h5>
         <datalist id="classes_dropdown">
-            <option value="CSE 190"/>
-            <option value="CSE 124"/>
             <option value="CSE 101"/>
+            <option value="CSE 124"/>
+            <option value="CSE 190"/>            
         </datalist>
     </div>
     <div style="flex: 1;">
-        <h4 style="margin-bottom: 0.75rem;">Selected Classes:</h4>
-        <ul id="selected_classes"></ul>
+        <div style="float: right;">
+            <h4 style="margin-bottom: 0.75rem; float: left;">Selected Classes:</h4>
+            <br><br>
+            <ul id="selected_classes" style="float: left;"></ul>
+        </div>
     </div>    
 </div>
 </div>
