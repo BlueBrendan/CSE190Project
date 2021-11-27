@@ -7,36 +7,68 @@
 
 {% block content %}
 <div class="pusher" style="padding-top: 8.5rem;">
-<div class="center-div">
-    <h1><b>Welcome to the UCSD Course Recommender!</b></h1>
-    <br><br>
-    <div class="center-div" style="display: flex; width: 30%;">
-    <div style="flex: 1;">
-        <h4 style="margin-bottom: 0.75rem; float: left; text-align: left;">Step 1. Add classes you've already taken</h4>
-        <br><br>
-        <h5><input id="classes_dropdown_input" list="classes_dropdown" style="float: left;" placeholder="example: CSE 190"></input></h5>
-        <datalist id="classes_dropdown">
-            <option value="CSE 101"/>
-            <option value="CSE 124"/>
-            <option value="CSE 190"/>            
-        </datalist>
-    </div>
-    <div style="flex: 1;">
-        <div style="float: right;">
-            <h4 style="margin-bottom: 0.75rem; float: left;">Selected Classes:</h4>
-            <br><br>
-            <ul id="selected_classes" style="float: left;"></ul>
+    <div class="center-div">
+        <h1><b>Welcome to the UCSD Course Recommender!</b></h1>
+        <br>
+        <!-- Page One: Selecting Completed Courses-->
+        <div class="center-div page" style="max-width: 40rem;" id="page-one">
+            <h4 style="margin-bottom: 0.75rem; width: 100%;">Step 1. Add classes you've <i>already</i> taken</h4>
+            <br>
+            <div style="display: flex">
+                <br>
+                <div style="flex: 1;">
+                    <h5><input id="classes_dropdown_input" list="classes_dropdown" style="float: left;" placeholder="example: CSE 190"></input></h5>
+                    <datalist id="classes_dropdown">
+                        <option value="CSE 101"/>
+                        <option value="CSE 124"/>
+                        <option value="CSE 190"/>            
+                    </datalist>
+                </div>
+                <div style="flex: 1;">
+                    <div style="float: right;">
+                        <h4 style="margin-bottom: 0.75rem;">Selected Classes:</h4>
+                        <ul id="selected_classes" style="float: left; height: 20rem; overflow: auto;"></ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>    
-</div>
+        <!-- Page Two: Selecting Ideal Difficulty-->
+        <div class="center-div invisible page" id="page-two">
+            <h4>Step 2. Select your ideal difficulty</h4>
+            <br>
+            <div style="display: flex;">
+                <div style="flex: 1;">
+                    <h3><b>Easy</b></h3>
+                    <img src={% static 'Easy.png'%} class="unselected" name="easy" style="max-width: 25rem; margin-bottom: 0.5rem;"></img>
+                    <br> 
+                    <i>&lt;6 hours per week</i>
+                </div>
+                <div style="flex: 1;">
+                    <h3><b>Medium</b></h3>
+                    <img src={% static 'Medium.png'%} class="unselected" name="medium" style="max-width: 25rem; margin-bottom: 0.5rem;"></img>
+                    <br>      
+                    <i>6-10 hours per week</i>
+                </div>
+                <div style="flex: 1;">
+                    <h3><b>Hard</b></h3>
+                    <img src={% static 'Hard.png'%} class="unselected" name="hard" style="max-width: 25rem; margin-bottom: 0.5rem;"></img>
+                    <br>               
+                    <i>&gt;10 hours per week</i>
+                </div>
+            </div>
+            <br>
+        </div>
+        <button class="btn btn-primary" id="previous-button" style="margin-right: 5rem;" disabled><h4>Previous</h4></button>
+        <button class="btn btn-primary" id="next-button" style="margin-left: 5rem;" ><h4>Next</h4></button>
+    </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
         $(document).ready(function(){
+            // Page 1 JS
             var total_classes = [];
-
             $("#classes_dropdown_input").on("input", function(event){
                 let val = this.value;
                 if($('#classes_dropdown option').filter(function(){
@@ -55,28 +87,65 @@
                 }
                 
             });
-
-            /*$("#classes_dropdown_input").on("input", function(event){
-                console.log($(this).val());
-                let selected_class = $(this).val();
-                if (!total_classes.includes(selected_class)){
-                    total_classes.push(selected_class);
-                    let button = "<li class='course-item' id=" + selected_class.replace(/ /g,"_") + "><span class='course-name'>" + selected_class + "</span><i class='invisible-link red times icon'></i><br></li>"
-                    $("#selected_classes").append(button);
-                    console.log(total_classes);
-                }
-            });*/
             $("#selected_classes").on("click", ".invisible-link", function(){
                 let course = $(this).closest(".course-item").find(".course-name").text();
                 $("#selected_classes #" + course.replace(/ /g,"_")).remove();
 
                 const index = total_classes.indexOf(course);
                 if (index > -1) {
-                total_classes.splice(index, 1);
+                    total_classes.splice(index, 1);
                 }
-                console.log(total_classes);
             })
-        });
-        
+
+            // Page 2 JS
+            var selected_difficulties = [];
+            $("img").on('click', function(){
+                let difficulty = $(this).attr("name")
+                if ($(this).hasClass("unselected")){
+                    $(this).removeClass("unselected");
+                    $(this).addClass("selected");
+                    selected_difficulties.push(difficulty);
+                    $("#next-button").prop("disabled",false);
+                }
+                else {
+                    $(this).removeClass("selected");
+                    $(this).addClass("unselected");
+                    let index = selected_difficulties.indexOf(difficulty);
+                    if (index > -1) {
+                        selected_difficulties.splice(index, 1);
+                    }
+                    if (selected_difficulties.length == 0){
+                        $("#next-button").prop("disabled",true);
+                    }
+                }
+            });
+
+            // Page navigation
+            var current_page = 1;
+            var time = 250;
+            $("#next-button").on("click", function(){
+                if($(this).hasClass("processing"))
+                    return;                
+                $(this).addClass("processing");
+                if (current_page == 1){ 
+                    var fade_out_page_id = "page-one";
+                    var fade_in_page_id = "page-two";
+                    $("#previous-button").prop('disabled', false);
+                    $("#next-button").prop("disabled",true);
+                }
+                else if (current_page == 2){
+                    var fade_out_page_id = "page-two";
+                    var fade_in_page_id = "page-three";
+                }
+                $("#" + fade_out_page_id).fadeOut(time);                
+                setTimeout(function() {
+                    $("#" + fade_in_page_id).hide();
+                    $("#" + fade_in_page_id).removeClass('invisible');
+                    $("#" + fade_in_page_id).fadeIn(time);
+                    $('#next-button').removeClass("processing");
+                }, time);
+                current_page++;
+            });
+        });        
     </script>
 {% endblock %}
