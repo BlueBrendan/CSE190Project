@@ -18,9 +18,13 @@ def submit(request):
         item = Category.objects.get(name=category)
         categories.append(item)
     courses = Courses.objects.filter(difficulty__in=difficulties, units__in=units, categories__in=categories)
-    for course in courses:
-        print(course)
-    return HttpResponse(200)
+    context = {
+        "difficulties": difficulties,
+        "units": units,
+        "categories": string_categories,
+        "courses": courses,
+    }
+    return render(request, 'main/result.html', context)
 
 def import_excel(request):
     path = os.path.join(os.path.expanduser('~'), 'Downloads', 'Undergraduate CSE Electives.xlsx')

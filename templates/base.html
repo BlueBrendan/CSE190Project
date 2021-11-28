@@ -36,9 +36,10 @@
   <body>
       <!-- Navbar -->
       {% include 'navbar.html' %}
-    
+    <div style="margin-top: 7rem;">
     {% block content %}
     {% endblock %}
+    </div>
     <script>
         const token = '{{ csrf_token }}'
     </script>

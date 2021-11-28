@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <div class="center-div" style="width: 50rem">
+        <h2>Based on your selection, we recommend these courses</h2>
+        <br>
+        <div style="text-align: left">
+            <b>Difficulty: 
+                {% for difficulty in difficulties reversed%}
+                    {% if forloop.last%}
+                        {{difficulty}}
+                    {% else %}
+                        {{difficulty}}, 
+                    {% endif %}
+                {% endfor %}
+            </b><br>
+            <b>Units: 
+                {% for unit in units %}
+                    {% if forloop.last%}
+                        {{unit}}
+                    {% else %}
+                        {{unit}}, 
+                    {% endif %}
+                {% endfor %}
+            </b><br>
+            <b>Categories: 
+                {% for category in categories %}
+                    {% if forloop.last%}
+                        {{category}}
+                    {% else %}
+                        {{category}}, 
+                    {% endif %}
+                {% endfor %}        
+            </b><br><br>
+            {% if courses %}
+                {% for course in courses %}
+                    <div class="ui accordion" style="margin-bottom: 0.5rem;">
+                        <div class="title">
+                            <i class="dropdown icon"></i>
+                            <b style="font-size: 1.25rem;">{{course.name}}&nbsp;&nbsp;{{course.title}}&nbsp;&nbsp;({{course.units}})</b>
+                        </div>
+                        <div class="content" style="margin-left: 2.5rem;">
+                            <div class="transition hidden" style="text-align: left;">
+                                <span><b>Description</b></span>
+                                <p>{{course.description}}</p>
+                                <p><b>Categories: </b>
+                                {% for category in course.categories.all %}
+                                    {% if forloop.last%}
+                                        {{category}}
+                                    {% else %}
+                                        {{category}}, 
+                                    {% endif %}
+                                {% endfor %}  
+                                </p>
+                                <p><b>Workload: </b>{{course.difficulty}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2 style="text-align: center; margin-top: 10rem;"><i>No classes meet your criteria. Try a broader search!</i></h2>
+            {% endif %}
+        </div>
+        <br>
+        <a href={% url 'main:home-view' %}><button class="btn btn-primary" style="font-size: 1.25rem;">Search Again</button></a>
+    </div>
+    <br>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('.ui.accordion')
+         .accordion()
+        ;
+    </script>
+{% endblock %}
