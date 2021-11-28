@@ -12,49 +12,52 @@
         <br>
         <!-- Page One: Selecting Completed Courses-->
         <div style="height: 35rem;">
-            <div class="center-div page" style="max-width: 40rem;" id="page-one">
-                <h4 style="margin-bottom: 0.75rem; width: 100%;">Step 1. Add classes you've <i>already</i> taken</h4>
-                <br>
-                <div style="display: flex">
-                    <br>
-                    <div style="flex: 1;">
-                        <h5><input id="classes_dropdown_input" list="classes_dropdown" style="float: left;" placeholder="example: CSE 190"></input></h5>
-                        <datalist id="classes_dropdown">
-                            <option value="CSE 101"/>
-                            <option value="CSE 124"/>
-                            <option value="CSE 190"/>            
-                        </datalist>
-                    </div>
-                    <div style="flex: 1;">
-                        <div style="float: right;">
-                            <h4 style="margin-bottom: 0.75rem;">Selected Classes:</h4>
-                            <ul id="selected_classes" style="float: left; height: 20rem; width: 100%; overflow: auto;"></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Page Two: Selecting Ideal Difficulty-->
-            <div class="center-div invisible page" id="page-two">
-                <h4>Step 2. Select your preferred course difficulty (defined by hours per week)</h4>
-                <br>
+            <!-- Page One: Selecting Ideal Difficulty-->
+            <div class="center-div page" id="page-one">
+                <h4>Step 1. Select your preferred course difficulty (defined by hours per week)</h4>
+                <br><br>
                 <div style="display: flex;">
                     <div style="flex: 1;">
                         <h3>Easy</h3>
-                        <img src={% static 'Easy.png'%} class="unselected" name="easy" style="max-width: 25rem; margin-bottom: 0.75rem;"></img>
+                        <img src={% static '1.png'%} class="unselected" name="1" style="max-width: 25rem; margin-bottom: 0.75rem;"></img>
                         <br> 
                         <i>&lt;6 hours per week</i>
                     </div>
                     <div style="flex: 1;">
                         <h3>Medium</h3>
-                        <img src={% static 'Medium.png'%} class="unselected" name="medium" style="max-width: 25rem; margin-bottom: 0.75rem;"></img>
+                        <img src={% static '2.png'%} class="unselected" name="2" style="max-width: 25rem; margin-bottom: 0.75rem;"></img>
                         <br>      
-                        <i>6-10 hours per week</i>
+                        <i>6-9 hours per week</i>
                     </div>
                     <div style="flex: 1;">
                         <h3>Hard</h3>
-                        <img src={% static 'Hard.png'%} class="unselected" name="hard" style="max-width: 25rem; margin-bottom: 0.75rem;"></img>
+                        <img src={% static '3.png'%} class="unselected" name="3" style="max-width: 25rem; margin-bottom: 0.75rem;"></img>
                         <br>               
-                        <i>&gt;10 hours per week</i>
+                        <i>9-12 hours per week</i>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3>Death</h3>
+                        <img src={% static '4.png'%} class="unselected" name="4" style="max-width: 25rem; margin-bottom: 0.75rem;"></img>
+                        <br>               
+                        <i>&gt;13 hours per week</i>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <!-- Page Two: Selecting Desired Units-->
+            <div class="center-div invisible page" style="max-width: 40rem;" id="page-two">
+                <h4>Step 2. Select your ideal number of units per course</h4>
+                <br><br>
+                <div style="display: flex;">
+                    <div style="flex: 1;">
+                        <h3>Two Units</h3>
+                        <btn class="btn btn-primary unselected unit-button" name="2">2</btn>
+                    </div>
+                    <div style="flex: 1">
+                    </div>
+                    <div style="flex: 1;">
+                        <h3>Four Units</h3>
+                        <btn class="btn btn-primary unselected unit-button" name="4">4</btn>
                     </div>
                 </div>
                 <br>
@@ -62,39 +65,49 @@
             <!-- Page Three: Selecting Topics of Interest-->
             <div class="center-div invisible page" style="max-width: 40rem;" id="page-three">
                 <h4 style="margin-bottom: 0.75rem; width: 100%;">Step 3. Select categories that you're interested in</h4>
-                <br>
+                <br><br>
                 <div style="display: flex">
-                    <br>
-                    <div style="flex: 1;">
-                        <h5><input id="category_dropdown_input" list="category_dropdown" style="float: left; width: 20rem;" placeholder="example: Software Engineering"></input></h5>
-                        <datalist id="category_dropdown">
-                            <option value="Software Engineering"/>
-                            <option value="Web Development"/>
-                            <option value="Machine Learning"/>     
-                            <option value="Databases"/>            
-                            <option value="Math"/>
-                            <option value="Architecture"/>            
-                            <option value="Theory"/>
-                            <option value="Computer Vision"/>
-                            <option value="Design & Interaction"/>
-                            <option value="Research"/>        
-                            <option value="Group Project"/>
-                            <option value="Biology"/>
-                            <option value="Education & Teaching"/>
-                            <option value="Management"/>
-                        </datalist>
+                    <div style="flex: 1; font-size: 1.25rem; text-align: left;">
+                        <input type="checkbox" id="software_engineering" value="Software Engineering">
+                        <label for="software_engineering">Software Engineering</label><br>
+                        <input type="checkbox" id="web_development" value="Web Development">
+                        <label for="web_development">Web Development</label><br>
+                        <input type="checkbox" id="machine_learning" value="Machine Learning">
+                        <label for="machine_learning">Machine Learning</label><br>
+                        <input type="checkbox" id="data_science" value="Data Science">
+                        <label for="data_science">Data Science</label><br>
+                        <input type="checkbox" id="databases" value="Databases">
+                        <label for="databases">Databases</label><br>
+                        <input type="checkbox" id="math" value="Math">
+                        <label for="math">Math</label><br>
+                        <input type="checkbox" id="architecture" value="Architecture">
+                        <label for="architecture">Architecture</label><br>
+                        <input type="checkbox" id="theory" value="Theory">
+                        <label for="theory">Theory</label><br>
                     </div>
-                    <div style="flex: 1;">
-                        <div style="float: right;">
-                            <h4 style="margin-bottom: 0.75rem;">Selected Classes:</h4>
-                            <ul id="selected_categories" style="float: left; height: 20rem; width: 100%; overflow: auto;"></ul>
-                        </div>
+                    <div style="text-align: right;">
+                    <div style="flex: 1; font-size: 1.25rem; text-align: left;">
+                        <input type="checkbox" id="computer_vision" value="Computer Vision">
+                        <label for="computer_vision">Computer Vision</label><br>
+                        <input type="checkbox" id="design_interaction" value="Design & Interaction">
+                        <label for="design_interaction">Design & Interaction</label><br>
+                        <input type="checkbox" id="research" value="Research">
+                        <label for="research">Research</label><br>
+                        <input type="checkbox" id="group_project" value="Group Project">
+                        <label for="group_project">Group Project</label><br>
+                        <input type="checkbox" id="biology" value="Biology">
+                        <label for="biology">Biology</label><br>
+                        <input type="checkbox" id="education_teaching" value="Education & Teaching">
+                        <label for="education_teaching">Education & Teaching</label><br>
+                        <input type="checkbox" id="management" value="Management">
+                        <label for="management">Management</label><br>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary" id="previous-button" style="margin-right: 5rem;" disabled><h4>Previous</h4></button>
-        <button class="btn btn-primary" id="next-button" style="margin-left: 5rem;" ><h4>Next</h4></button>
+        <button class="btn btn-primary" id="previous-button" style="margin-right: 2rem; width: 10rem;" disabled><h4>Previous</h4></button>
+        <button class="btn btn-primary" id="next-button" style="margin-left: 2rem; width: 10rem;" disabled><h4>Next</h4></button>
     </div>
 </div>
 {% endblock %}
@@ -103,36 +116,6 @@
     <script>
         $(document).ready(function(){
             // Page 1 JS
-            var total_classes = [];
-            $("#classes_dropdown_input").on("input", function(event){
-                let val = this.value;
-                if($('#classes_dropdown option').filter(function(){
-                    return this.value.toUpperCase() === val.toUpperCase();
-                }).length) {
-                    
-                    let selected_class = this.value;
-                    if (!total_classes.includes(selected_class)){
-                        total_classes.push(selected_class);
-                        let button = "<li class='course-item' id=" + selected_class.replace(/ /g,"_") + "><span class='course-name'>" + selected_class + "</span><i class='invisible-link red times icon'></i><br></li>"
-                        $("#selected_classes").append(button);
-                    }
-                    // Clear input
-                    $("#classes_dropdown_input").removeAttr('placeholder');
-                    $("#classes_dropdown_input").val("");
-                }
-                
-            });
-            $("#selected_classes").on("click", ".invisible-link", function(){
-                let course = $(this).closest(".course-item").find(".course-name").text();
-                $("#selected_classes #" + course.replace(/ /g,"_")).remove();
-
-                const index = total_classes.indexOf(course);
-                if (index > -1) {
-                    total_classes.splice(index, 1);
-                }
-            })
-
-            // Page 2 JS
             var selected_difficulties = [];
             $("img").on('click', function(){
                 let difficulty = $(this).attr("name")
@@ -154,36 +137,47 @@
                     }
                 }
             });
+            var selected_units = [];
+            // Page 2 JS
+            $("btn").on('click', function(){
+                let unit = $(this).attr("name")
+                if ($(this).hasClass("unselected")){
+                    $(this).removeClass("unselected");
+                    $(this).addClass("selected");
+                    selected_units.push(unit);
+                    $("#next-button").prop("disabled",false);
+                }
+                else {
+                    $(this).removeClass("selected");
+                    $(this).addClass("unselected");
+                    let index = selected_units.indexOf(unit);
+                    if (index > -1) {
+                        selected_units.splice(index, 1);
+                    }
+                    if (selected_units.length == 0){
+                        $("#next-button").prop("disabled",true);
+                    }
+                }
+            });
 
             // Page 3 JS
             var total_categories = [];
-            $("#category_dropdown_input").on("input", function(event){
-                let val = this.value;
-                if($('#category_dropdown option').filter(function(){
-                    return this.value.toUpperCase() === val.toUpperCase();
-                }).length) {
-                    
-                    let selected_category = this.value;
-                    if (!total_categories.includes(selected_category)){
-                        total_categories.push(selected_category);
-                        let button = "<li class='course-item' id=" + selected_category.replace(/ /g,"_") + "><span class='course-name'>" + selected_category + "</span><i class='invisible-link red times icon'></i><br></li>"
-                        $("#selected_categories").append(button);
+            $("input").on("click", function(event){
+                let category = $(this).attr("value");
+                if (!total_categories.includes(category)){
+                    total_categories.push(category);
+                    $("#next-button").prop("disabled",false);
+                }
+                else {
+                    let index = total_categories.indexOf(category);
+                    if (index > -1) {
+                        total_categories.splice(index, 1);
                     }
-                    // Clear input
-                    $("#category_dropdown_input").removeAttr('placeholder');
-                    $("#category_dropdown_input").val("");
                 }
-                
+                if (total_categories.length == 0){
+                    $("#next-button").prop("disabled",true);
+                }                
             });
-            $("#selected_classes").on("click", ".invisible-link", function(){
-                let course = $(this).closest(".course-item").find(".course-name").text();
-                $("#selected_classes #" + course.replace(/ /g,"_")).remove();
-
-                const index = total_classes.indexOf(course);
-                if (index > -1) {
-                    total_classes.splice(index, 1);
-                }
-            })
 
             // Page navigation
             var current_page = 1;
@@ -196,12 +190,14 @@
                 if (current_page == 1){ 
                     var fade_out_page_id = "page-one";
                     var fade_in_page_id = "page-two";
-                    if (selected_difficulties.length == 0)
+                    if (selected_units.length == 0)
                         $("#next-button").prop("disabled",true);
                 }
                 else if (current_page == 2){
                     var fade_out_page_id = "page-two";
                     var fade_in_page_id = "page-three";
+                    if (total_categories.length == 0)
+                        $("#next-button").prop("disabled",true);
                     $("#next-button").html("<h4>Finish</h4>");
                 }
                 $("#" + fade_out_page_id).fadeOut(time);                

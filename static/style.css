@@ -69,3 +69,14 @@ ul {
     transition: 0.25s;
     opacity: 80%;
 }
+
+.unit-button {
+    font-size: 11rem;
+    border-radius: 20px;
+    height: 15rem;
+    width: 15rem;
+}
+
+label {
+    margin-bottom: 0.5rem;
+}

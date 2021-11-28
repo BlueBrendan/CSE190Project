@@ -5,5 +5,6 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.home_view, name='home-view'),
+    path('import', views.import_excel, name='import-view'),
 ]
 
