@@ -9,6 +9,19 @@ from category.models import Category
 def home_view(request):
     return render(request, 'main/home.html')
 
+def submit(request):
+    difficulties = request.GET.get("selected_difficulties").split(',')
+    units = request.GET.get("selected_units").split(',')
+    string_categories = request.GET.get("total_categories").split(',')
+    categories = []
+    for category in string_categories:
+        item = Category.objects.get(name=category)
+        categories.append(item)
+    courses = Courses.objects.filter(difficulty__in=difficulties, units__in=units, categories__in=categories)
+    for course in courses:
+        print(course)
+    return HttpResponse(200)
+
 def import_excel(request):
     path = os.path.join(os.path.expanduser('~'), 'Downloads', 'Undergraduate CSE Electives.xlsx')
     wb = openpyxl.load_workbook(filename=path, data_only=True)['Sheet1']

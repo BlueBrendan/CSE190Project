@@ -106,8 +106,13 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary" id="previous-button" style="margin-right: 2rem; width: 10rem;" disabled><h4>Previous</h4></button>
-        <button class="btn btn-primary" id="next-button" style="margin-left: 2rem; width: 10rem;" disabled><h4>Next</h4></button>
+        <form action="/submit" id="submit_form" method="GET">
+            <input name="selected_difficulties" type="hidden">
+            <input name="selected_units" type="hidden">
+            <input name="total_categories" type="hidden">
+            <button class="btn btn-primary" id="previous-button" style="margin-right: 2rem; width: 10rem;" type="button" disabled><h4>Previous</h4></button>
+            <button class="btn btn-primary" id="next-button" style="margin-left: 2rem; width: 10rem;" type="button" disabled><h4>Next</h4></button>
+        </form>
     </div>
 </div>
 {% endblock %}
@@ -136,6 +141,7 @@
                         $("#next-button").prop("disabled",true);
                     }
                 }
+                $("#submit_form input[name=selected_difficulties]").val(selected_difficulties);
             });
             var selected_units = [];
             // Page 2 JS
@@ -158,6 +164,7 @@
                         $("#next-button").prop("disabled",true);
                     }
                 }
+                $("#submit_form input[name=selected_units]").val(selected_units);
             });
 
             // Page 3 JS
@@ -176,7 +183,8 @@
                 }
                 if (total_categories.length == 0){
                     $("#next-button").prop("disabled",true);
-                }                
+                }
+                $("#submit_form input[name=total_categories]").val(total_categories);
             });
 
             // Page navigation
@@ -199,6 +207,8 @@
                     if (total_categories.length == 0)
                         $("#next-button").prop("disabled",true);
                     $("#next-button").html("<h4>Finish</h4>");
+                    $("#next-button").removeAttr("type").attr("type", "submit");
+                    event.preventDefault();
                 }
                 $("#" + fade_out_page_id).fadeOut(time);                
                 setTimeout(function() {
@@ -223,6 +233,7 @@
                     var fade_out_page_id = "page-three";
                     var fade_in_page_id = "page-two";
                     $("#next-button").html("<h4>Next</h4>");
+                    $("#next-button").removeAttr("type").attr("type", "button");
                 }
                 $("#" + fade_out_page_id).fadeOut(time);                
                 setTimeout(function() {
