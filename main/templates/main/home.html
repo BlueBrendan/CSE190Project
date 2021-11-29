@@ -121,25 +121,27 @@
             // Page 1 JS
             var selected_difficulties = [];
             $("img").on('click', function(){
-                let difficulty = $(this).attr("name")
-                if ($(this).hasClass("unselected")){
-                    $(this).removeClass("unselected");
-                    $(this).addClass("selected");
-                    selected_difficulties.push(difficulty);
-                    $("#next-button").prop("disabled",false);
-                }
-                else {
-                    $(this).removeClass("selected");
-                    $(this).addClass("unselected");
-                    let index = selected_difficulties.indexOf(difficulty);
-                    if (index > -1) {
-                        selected_difficulties.splice(index, 1);
+                if ($(this).attr("id") != "go_bears"){
+                    let difficulty = $(this).attr("name")
+                    if ($(this).hasClass("unselected")){
+                        $(this).removeClass("unselected");
+                        $(this).addClass("selected");
+                        selected_difficulties.push(difficulty);
+                        $("#next-button").prop("disabled",false);
                     }
-                    if (selected_difficulties.length == 0){
-                        $("#next-button").prop("disabled",true);
+                    else {
+                        $(this).removeClass("selected");
+                        $(this).addClass("unselected");
+                        let index = selected_difficulties.indexOf(difficulty);
+                        if (index > -1) {
+                            selected_difficulties.splice(index, 1);
+                        }
+                        if (selected_difficulties.length == 0){
+                            $("#next-button").prop("disabled",true);
+                        }
                     }
+                    $("#submit_form input[name=selected_difficulties]").val(selected_difficulties);
                 }
-                $("#submit_form input[name=selected_difficulties]").val(selected_difficulties);
             });
             var selected_units = [];
             // Page 2 JS

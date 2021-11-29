@@ -34,11 +34,20 @@
   </head>  
   
   <body>
-      <!-- Navbar -->
-      {% include 'navbar.html' %}
-    <div style="margin-top: 7rem;">
-    {% block content %}
-    {% endblock %}
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+    <br><br><br><br><br>
+    <div class="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div class="footer">
+      <a href="https://www.berkeley.edu/" style="text-decoration: none; display: inline-block; width: 15rem;">
+      <div style="display: flex; align-items: center; margin: 1.5rem;">
+        <img src="{% static 'go_bears.png'%}" style="width: 3.5rem;" id="go_bears"></img>
+        <p style="color: white; font-size: 1.25rem; margin-left: 0.75rem;"><i>Go Bears</i></p>
+      </div>
+      </a>
     </div>
     <script>
         const token = '{{ csrf_token }}'
