@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="center-div" style="width: 50rem">
+    <div class="center-div" style="width: 60rem">
         <h2>Based on your selection, we recommend these courses</h2>
         <br>
         <div style="text-align: left">
@@ -39,8 +39,8 @@
             </b><br><br>
             {% if courses %}
                 {% for course in courses %}
-                    <div class="ui accordion" style="margin-bottom: 0.5rem;">
-                        <div class="title">
+                    <div class="ui accordion" style="margin-bottom: 0.5rem;" >                  
+                        <div class="title" id="{{course.underscore}}">
                             <i class="dropdown icon"></i>
                             <b style="font-size: 1.25rem;">{{course.name}}&nbsp;&nbsp;{{course.title}}&nbsp;&nbsp;({{course.units}})</b>
                         </div>
@@ -74,8 +74,19 @@
 
 {% block scripts %}
     <script>
-        $('.ui.accordion')
-         .accordion()
-        ;
+        var accordion = {
+            accordion: $('.ui.accordion'),
+            duration: 200,
+        };
+        $('.ui.accordion').accordion(accordion);
+        $(".title").on("click", function(){
+            let id = $(this).attr('id');
+            setTimeout(function(){                
+                $('html, body').animate({
+                    scrollTop: $("#" + id).offset().top-60
+                }, 200);
+            }, 50)
+            
+        })
     </script>
 {% endblock %}

@@ -11,3 +11,6 @@ class Courses(models.Model):
 
     def __str__(self):
         return self.name
+
+    def underscore(self):
+        return self.name.replace(' ', '_')

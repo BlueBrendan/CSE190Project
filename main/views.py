@@ -17,7 +17,7 @@ def submit(request):
     for category in string_categories:
         item = Category.objects.get(name=category)
         categories.append(item)
-    courses = Courses.objects.filter(difficulty__in=difficulties, units__in=units, categories__in=categories)
+    courses = Courses.objects.filter(difficulty__in=difficulties, units__in=units, categories__in=categories).distinct()
     context = {
         "difficulties": difficulties,
         "units": units,

@@ -1,6 +1,5 @@
-html, body {
+body {
     background: #f1f1f1 !important;
-    height: 100%;
     font-family: helvetica;
     position: relative;
     overflow: auto;
@@ -83,8 +82,10 @@ label {
     margin-bottom: 0.5rem;
 }
 
-.content {
+.main-content {
     min-height: 100%;
+    margin-bottom: 5rem;
+    clear: both;
 }
 
 .footer {
